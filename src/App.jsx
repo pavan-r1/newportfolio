@@ -22,16 +22,31 @@ import {
   FiX,
 } from 'react-icons/fi';
 import { SiGooglecloud, SiGooglecolab, SiJupyter, SiMysql, SiPython } from 'react-icons/si';
-const certificateGallery = Object.entries(
-  import.meta.glob('../certificates/*.{jpg,jpeg,png,webp,pdf}', { eager: true, import: 'default' })
-).map(([path, src]) => {
-  const fileName = path.split('/').pop() || path;
-  return {
-    name: fileName.replace(/\.[^.]+$/, ''),
-    src,
-    isPdf: fileName.toLowerCase().endsWith('.pdf'),
-  };
-});
+
+const certificatePath = (fileName) => `/certificates/${encodeURIComponent(fileName)}`;
+
+const certificateGallery = [
+  'Azure Data Fundamentals (Microsoft).jpg',
+  'Certificate of Completion.jpg',
+  'GHCI 2025 - Hackathon Participation Certificate.png',
+  'google certified professional machine learning course(udemy).jpg',
+  'google spreadsheet.jpg',
+  'intern as data visulazion trainee(Excelerate).jpg',
+  'INTERN at Data Analyst Associate(Excelerate).jpg',
+  'internship on AI fundamentals by INBiOT.jpg',
+  'INTRODUCTION TO AI by coursera.jpg',
+  'maximize Productivity with ai tool with coursera.jpg',
+  'microsoft excel.jpg',
+  'NLP certified by NPTEL.jpg',
+  'nptel certified Data Analytics using python.jpg',
+  'RDBMS AND MICROSOFT FABRIC.jpg',
+  'tjitaz_Internship Certificate.jpg',
+  'tj_beds239954-Machine Learning (2).jpg',
+].map((fileName) => ({
+  name: fileName,
+  src: certificatePath(fileName),
+  isPdf: fileName.toLowerCase().endsWith('.pdf'),
+}));
 const projectPriority = [
   { key: 'ekyc', label: 'eKYC' },
   { key: 'dataviz-pro', label: 'DataViz Pro' },
@@ -424,6 +439,18 @@ export default function App() {
     };
 
     loadGitData();
+  }, []);
+
+  useEffect(() => {
+    const updateDocumentMeta = () => {
+      const canonicalUrl = window.location.origin + '/';
+      const canonicalLink = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', canonicalUrl);
+      document.head.appendChild(canonicalLink);
+    };
+
+    updateDocumentMeta();
   }, []);
 
  useEffect(() => {
