@@ -670,7 +670,7 @@ export default function App() {
       </header>
 
       <main className="relative z-10">
-        <section id="home" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6 lg:flex-row lg:items-center lg:gap-8">
+        <section id="home" className="mx-auto flex min-h-screen w-full max-w-6xl flex-col-reverse justify-center px-4 pb-16 pt-28 sm:px-6 lg:flex-row lg:items-center lg:gap-8">
           <div className="w-full lg:w-1/2">
             <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mb-2 font-header text-lg uppercase tracking-[0.3em] text-cyber-cyan/85">
               AI x Data Science
