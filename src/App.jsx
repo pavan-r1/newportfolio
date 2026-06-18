@@ -1,4 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
+import "swiper/css/effect-coverflow";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { FaCertificate } from "react-icons/fa";
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   FiActivity,
@@ -54,14 +60,17 @@ const projectPriority = [
     key: 'integrated-platform-for-crowdsourced-ocean-hazard-reporting-and-social-media-analytics',
     label: 'Integrated Platform for Crowdsourced Ocean Hazard Reporting and Social Media Analytics',
   },
-  {
-    key: 'real-time-integrated-platform-for-crowdsourced-ocean-hazard-reporting-and-social-media-analytics',
-    label: 'Real-time Integrated Platform for Crowdsourced Ocean Hazard Reporting and Social Media Analytics',
-  },
-  { key: 'oceanx', label: 'OCEANX' },
-  { key: 'club_registration', label: 'Club Registration' },
+  
   { key: 'dsaproject', label: 'Banking System' },
   { key: 'techfest', label: 'Force Website' },
+  {
+  key: 'edhumind-ai',
+  label: 'EduMind AI - AI-Powered Education Platform',
+},
+{
+    key: 'internationconf',
+    label: 'International Conference On RATE - 2K26',
+  },
 ];
 const excludedProjectKeys = ['charan_portfoilio', 'certificate'];
 const normalizeRepoName = (value) => value.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -216,6 +225,17 @@ const experienceTimeline = [
       'Continually build practical AI and analytics projects for real-world impact.',
     ],
   },
+  {
+    role: 'Personal Projects & Innovation',
+    org: 'EduMind AI - AI-Powered Education Platform',
+    points: [
+      'Teacher Authentication - Secure login/signup with subject and department management',
+      'File Upload System - Support for PDF, PPT, DOCX files organized by subject',
+      'PDF/Text Processing - Extract and chunk content with vector embeddings',
+      'AI Summary Generator - Topic-wise explanations and student-friendly summaries',
+      'Important Topic Extraction - Identify key concepts and exam-important points',
+    ],
+  },
 ];
 
 const counters = [
@@ -302,7 +322,16 @@ export default function App() {
   const audioCtxRef = useRef(null);
   const analyserRef = useRef(null);
   const animationRef = useRef(null);
-
+  const projectImages = {
+  "eKYC": "/project/KYC.png",
+  "DataViz Pro": "/project/DataViz Pro.png",
+  "Banking System": "/project/Banking System.png",
+  "Force Website": "/project/Force.png",
+  "EduMind AI - AI-Powered Education Platform": "/project/EduMind AI.png",
+  "International Conference On RATE - 2K26": "/project/RATE.png",
+  "Integrated Platform for Crowdsourced Ocean Hazard Reporting and Social Media Analytics":
+    "/project/Integrated Platform for Crowdsourced Ocean Hazard Reporting and Social Media Analytics.png",
+};
   const iconOrbits = useMemo(
     () => [
       { icon: SiPython, angle: 15, r: 205 },
@@ -739,31 +768,64 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} className="glass-card">
-            <div className="mb-5 flex items-center gap-2 text-cyber-cyan">
-              <FiUser />
-              <h2 className="font-header text-3xl font-bold">About Me</h2>
-            </div>
-            <div className="space-y-4 text-slate-300">
-              {aboutParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
+        <section id="about" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.25 }}
+    transition={{ duration: 0.6 }}
+    className="grid items-center gap-12 md:grid-cols-2"
+  >
 
-            <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-              {counters.map((item) => (
-                <Counter key={item.label} end={item.value} label={item.label} />
-              ))}
-            </div>
-          </motion.div>
-        </section>
+    {/* Left Side */}
+    <div>
+      <div className="mb-3 flex items-center gap-2 text-cyber-cyan uppercase tracking-[0.2em]">
+        <FiUser />
+        <span>About</span>
+      </div>
+
+      <h2 className="mb-6 font-header text-5xl font-bold cyber-title-glow">
+        ABOUT ME.
+      </h2>
+
+      <div className="space-y-5 text-slate-300 leading-relaxed">
+        {aboutParagraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+
+      <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {counters.map((item) => (
+          <Counter
+            key={item.label}
+            end={item.value}
+            label={item.label}
+          />
+        ))}
+      </div>
+    </div>
+
+    {/* Right Side */}
+    <div className="relative">
+      <div className="absolute -left-10 top-12 hidden h-[2px] w-24 bg-cyber-cyan md:block"></div>
+
+      <img
+        src="/profile.jpeg"
+        alt="Pavan R"
+        className="h-[550px] w-full rounded-2xl object-cover border border-cyber-cyan/20 shadow-[0_0_40px_rgba(0,244,255,0.25)]"
+      />
+    </div>
+
+  </motion.div>
+</section>
 
         <section id="skills" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 text-cyber-cyan">
-            <FiActivity />
-            <h2 className="font-header text-3xl font-bold">Skills</h2>
-          </div>
+          <div className="mb-10 flex flex-col items-center justify-center text-center text-cyber-cyan">
+            <FiActivity className="mb-2 text-4xl" />
+            <h2 className="font-header text-4xl font-bold">
+              Skills
+            </h2>
+          </div>                              
 
           <div className="mb-8 flex flex-wrap gap-3">
             {quickSkills.map((skill) => {
@@ -806,30 +868,55 @@ export default function App() {
           </div>
         </section>
 
-        <section id="experience" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 text-cyber-cyan">
-            <FiBriefcase />
-            <h2 className="font-header text-3xl font-bold">Experience</h2>
-          </div>
+        <section id="experience" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">        
+          <div className="mb-10 flex items-center justify-center gap-3 text-cyber-cyan">
+          <FiBriefcase className="text-3xl" />
+          <h2 className="font-header text-4xl font-bold">
+            Experience
+          </h2>
+        </div>
 
-          <div className="relative ml-3 border-l border-cyber-cyan/25 pl-6">
-            {experienceTimeline.map((item, idx) => (
-              <motion.article key={item.role} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.07 }} viewport={{ once: true, amount: 0.25 }} className="relative mb-6 glass-card">
-                <span className="absolute -left-[35px] top-6 h-4 w-4 rounded-full border border-cyber-cyan bg-cyber-dark shadow-[0_0_18px_rgba(0,244,255,0.75)]" />
-                <h3 className="font-header text-xl text-cyber-cyan">{item.role}</h3>
-                <p className="mb-3 text-sm text-cyber-textMuted">{item.org}</p>
-                <ul className="list-disc space-y-2 pl-5 text-sm text-slate-300">
-                  {item.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </motion.article>
-            ))}
-          </div>
+          <div className="relative">
+  {/* Center Line */}
+  <div className="absolute left-6 md:left-1/2 top-0 h-full w-[2px] md:-translate-x-1/2 bg-cyber-cyan/30"></div>
+
+  {experienceTimeline.map((item, idx) => (
+    <motion.div
+      key={item.role}
+      initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className={`relative mb-12 flex w-full ${
+        idx % 2 === 0 ? "justify-start" : "justify-end"
+      }`}
+    >
+      {/* Timeline Dot */}
+      <div className="absolute left-6 md:left-1/2 top-8 z-10 h-5 w-5 -translate-x-1/2 rounded-full border-2 border-cyber-cyan bg-cyber-dark shadow-[0_0_20px_rgba(0,244,255,0.9)]"></div>
+
+      {/* Card */}
+      <div className="glass-card ml-14 md:ml-0 w-[calc(100%-4rem)] md:w-[45%]">
+        <h3 className="font-header text-xl text-cyber-cyan">
+          {item.role}
+        </h3>
+
+        <p className="mb-3 text-sm text-cyber-textMuted">
+          {item.org}
+        </p>
+
+        <ul className="list-disc space-y-2 pl-5 text-sm text-slate-300">
+          {item.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  ))}
+</div>
         </section>
 
         <section id="certifications" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 text-cyber-cyan">
+          <div className="mb-10 flex flex-col items-center justify-center text-center text-cyber-cyan">
             <FiAward />
             <h2 className="font-header text-3xl font-bold">Certifications</h2>
           </div>
@@ -852,75 +939,166 @@ export default function App() {
               </motion.article>
             ))}
           </div>
-
-          <div className="mt-8">
-            <h3 className="mb-3 font-header text-xl text-cyber-cyan">Certificate Gallery</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {certificateGallery.length > 0 ? (
-                certificateGallery.map((file, idx) => (
+          </section>
+          <section id="certificate-gallery" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
+            <div className="mb-10 flex items-center justify-center gap-3 text-cyber-cyan">
+          <FaCertificate className="mb-2 text-4xl" />
+          <h2 className="font-header text-4xl font-bold">
+          Certificate Gallery
+          </h2>
+        </div>
+          <div>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            navigation
+            autoplay={{ delay: 2500 }}
+            slidesPerView={3}
+            centeredSlides
+            spaceBetween={20}
+            loop
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {certificateGallery.length > 0 ? (
+              certificateGallery.map((file, idx) => (
+                <SwiperSlide key={`${file.name}-${idx}`}>
                   <button
-                    key={`${file.name}-${idx}`}
                     onClick={() => {
                       setOpenCert(file.src);
                       setActiveCertIndex(idx);
                     }}
-                    className="group overflow-hidden rounded-2xl border border-cyber-cyan/25 bg-cyber-card/55 text-left transition hover:-translate-y-1 hover:border-cyber-pink/45"
+                    className="group overflow-hidden rounded-2xl border border-cyber-cyan/25 bg-cyber-card/55 text-left transition hover:border-cyber-pink/45"
                   >
                     <div className="aspect-[4/3] overflow-hidden bg-slate-900/70">
                       {file.isPdf ? (
-                        <div className="flex h-full items-center justify-center text-cyber-cyan">PDF Preview</div>
+                        <div className="flex h-full items-center justify-center text-cyber-cyan">
+                          PDF Preview
+                        </div>
                       ) : (
-                        <img src={file.src} alt={file.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+                        <img
+                          src={file.src}
+                          alt={file.name}
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                          loading="lazy"
+                        />
                       )}
                     </div>
-                    <div className="p-3 text-xs text-slate-300">{file.name}</div>
+
+                    <div className="p-3 text-center text-sm text-slate-300">
+                      {file.name}
+                    </div>
                   </button>
-                ))
-              ) : (
-                <p className="text-sm text-cyber-textMuted">Certificate files are loaded from the local certificates folder.</p>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 text-cyber-cyan">
-            <FiCode />
-            <h2 className="font-header text-3xl font-bold">Projects</h2>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {repos.length > 0 ? (
-              repos.map((repo, idx) => (
-                <motion.a
-                  key={repo.name}
-                  href={repo.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  whileHover={{ y: -6 }}
-                  className="group glass-card block"
-                >
-                  <div className="mb-2 flex items-center justify-between">
-                    <h3 className="font-header text-xl text-cyber-cyan">{repo.name}</h3>
-                    <FiArrowUpRight className="text-cyber-pink transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </div>
-                  <p className="mb-3 text-sm text-slate-300">{repo.description}</p>
-                  <div className="text-xs text-cyber-textMuted">{repo.language}</div>
-                </motion.a>
+                </SwiperSlide>
               ))
             ) : (
-              <p className="text-sm text-cyber-textMuted">Projects will auto-load from GitHub profile repositories.</p>
+              <p className="text-sm text-cyber-textMuted">
+                Certificate files are loaded from the local certificates folder.
+              </p>
             )}
+        </Swiper>
+        </div>
+        </section>
+
+        
+        <section
+          id="projects"
+          className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6"
+        >
+          <div className="mb-10 flex flex-col items-center justify-center text-center text-cyber-cyan">
+            <FiCode className="mb-2 text-4xl" />
+            <h2 className="font-header text-3xl font-bold">
+              Projects
+            </h2>
+            <p className="mt-2 text-cyber-textMuted">
+              AI, Data Science, Analytics & Web Development Projects
+            </p>
           </div>
+
+          <Swiper
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            coverflowEffect={{
+              rotate: 20,
+              stretch: 0,
+              depth: 200,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            modules={[EffectCoverflow, Navigation, Autoplay]}
+            navigation
+            className="projectSwiper"
+          >
+            {repos.length > 0 ? (
+              repos.map((repo, idx) => (
+                <SwiperSlide
+                    key={repo.name}
+                    className="!w-[280px] md:!w-[380px]"
+                >
+                  <motion.a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.03 }}
+                    className="group glass-card block overflow-hidden"
+                  >
+                    <img
+                      src={projectImages[repo.name]}
+                      alt={repo.name}
+                      className="mb-4 h-40 w-full rounded-xl object-cover transition duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.src = "/avatar.jpg";
+                      }}
+                    />
+
+                    <div className="mb-2 flex items-center justify-between">
+                      <h3 className="font-header text-lg md:text-xl text-cyber-cyan">
+                        {repo.name}
+                      </h3>
+
+                      <FiArrowUpRight className="text-cyber-pink transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    </div>
+
+                    <p className="mb-4 text-xs md:text-sm text-slate-300">
+                      {repo.description}
+                    </p>
+
+                    <div className="inline-flex items-center rounded-full border border-cyber-cyan/30 px-3 py-1 text-xs text-cyber-cyan">
+                      {repo.language}
+                    </div>
+                  </motion.a>
+                </SwiperSlide>
+              ))
+            ) : (
+              <p className="text-center text-sm text-cyber-textMuted">
+                Projects will auto-load from GitHub profile repositories.
+              </p>
+            )}
+          </Swiper>
         </section>
 
         <section id="contact" className="mx-auto w-full max-w-6xl px-4 pb-20 pt-16 sm:px-6">
-          <div className="mb-6 flex items-center gap-2 text-cyber-cyan">
-            <FiMail />
+          <div className="mb-10 flex flex-col items-center justify-center text-center text-cyber-cyan">
+            <FiMail className="mb-2 text-4xl" />
             <h2 className="font-header text-3xl font-bold">Contact</h2>
           </div>
 

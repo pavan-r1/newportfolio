@@ -14,7 +14,12 @@
   
   --animate-avatar-pulse: avatarPulse 2s infinite ease-in-out;
 }
-
+@media (max-width: 768px) {
+  .projectSwiper .swiper-button-prev,
+  .projectSwiper .swiper-button-next {
+    display: none;
+  }
+}
 @keyframes avatarPulse {
   0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(0, 244, 255, 0.35); }
   50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(122, 87, 255, 0.7); }
