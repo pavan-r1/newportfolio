@@ -7,6 +7,10 @@ import 'swiper/css/navigation';
 import { FaCertificate } from "react-icons/fa";
 import { AnimatePresence, motion } from 'framer-motion';
 import {
+  FiDownload,
+  FiFileText,
+} from "react-icons/fi";
+import {
   FiActivity,
   FiArrowUpRight,
   FiAward,
@@ -715,32 +719,37 @@ export default function App() {
             <p className="mt-2 text-cyber-textMuted">Innovating with Data. Building the Future of AI.</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                onClick={toggleAudio}
+              {/* Download Resume */}
+              <a
+                href="/resume/PAVAN_RESUME.pdf"
+                download
                 className="inline-flex items-center gap-2 rounded-full border border-cyber-cyan/45 bg-cyber-cyan/10 px-5 py-2.5 text-cyber-cyan transition hover:shadow-[0_0_24px_rgba(0,244,255,0.45)]"
               >
-                {isAudioPlaying ? <FiPause /> : <FiPlay />}
-                {isAudioPlaying ? 'Pause Intro Audio' : 'Play Intro Audio'}
-              </button>
-              <button onClick={() => smoothScroll('#projects')} className="rounded-full border border-cyber-purple/45 bg-cyber-purple/10 px-5 py-2.5 text-cyber-purple transition hover:shadow-[0_0_24px_rgba(122,87,255,0.45)]">
+                <FiDownload />
+                Download Resume
+              </a>
+
+              {/* View Resume */}
+              <a
+                href="/resume/PAVAN_RESUME.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-cyber-purple/45 bg-cyber-purple/10 px-5 py-2.5 text-cyber-purple transition hover:shadow-[0_0_24px_rgba(122,87,255,0.45)]"
+              >
+                <FiFileText />
+                View Resume
+              </a>
+
+              {/* Projects Button */}
+              <button
+                onClick={() => smoothScroll('#projects')}
+                className="inline-flex items-center gap-2 rounded-full border border-cyber-pink/45 bg-cyber-pink/10 px-5 py-2.5 text-cyber-pink transition hover:shadow-[0_0_24px_rgba(255,61,184,0.45)]"
+              >
+                <FiCode />
                 Explore My Work
               </button>
             </div>
-
-            <div className="mt-6 rounded-2xl border border-cyber-cyan/20 bg-cyber-card/60 p-4 backdrop-blur-xl">
-              <p className="text-sm leading-7 text-slate-300">{activeSubtitle}</p>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-800">
-                <div className="h-full rounded-full bg-gradient-to-r from-cyber-cyan via-cyber-purple to-cyber-pink" style={{ width: `${audioProgress}%` }} />
-              </div>
-            </div>
-
-            <audio
-  ref={audioRef}
-  src="/intro.mp3"
-  preload="auto"
-  onTimeUpdate={handleTimeUpdate}
-  onEnded={() => setIsAudioPlaying(false)}
-/>
+            
           </div>
 
           <div className="relative mt-12 flex w-full justify-center lg:mt-0 lg:w-1/2">
